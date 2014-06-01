@@ -11,7 +11,8 @@ RUN yum install -y http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-releas
 
 # Install packages.
 RUN yum install -y java-1.7.0-openjdk mysql-community-client mysql-community-libs-compat mysql-community-server openssh-server passwd perl-JSON python-simplevisor
-RUN yum install -y zabbix-agent zabbix-get zabbix-java-gateway zabbix-sender zabbix-server zabbix-server-mysql zabbix-web zabbix-web-japanese zabbix-web-mysql
+RUN yum install -y zabbix-agent zabbix-get zabbix-java-gateway zabbix-sender zabbix-server zabbix-web zabbix-web-japanese zabbix-web-mysql
+RUN yum install -y net-snmp snmptt
 
 # Place configuration files.
 ADD httpd.conf /etc/httpd/conf/httpd.conf
@@ -43,6 +44,6 @@ RUN service mysqld start; mysql -uroot -e "GRANT ALL ON zabbix.* TO 'zabbix'@'lo
 # Initialize zabbix database.
 RUN service mysqld start; (cd `ls -1d /usr/share/doc/zabbix-server-mysql-*/create | tail -n 1`; cat schema.sql images.sql data.sql) | mysql -uroot zabbix; service mysqld stop
 
-EXPOSE 22 80 10051
+EXPOSE 22 80 10051 162
 VOLUME ["/var/lib/mysql", "/usr/lib/zabbix/alertscripts", "/usr/lib/zabbix/externalscripts", "/etc/zabbix/zabbix_agentd.d"]
 CMD ["/usr/bin/simplevisor", "--conf", "/etc/simplevisor.conf", "start"]
