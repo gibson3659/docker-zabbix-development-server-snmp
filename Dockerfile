@@ -21,11 +21,13 @@ ADD my.cnf /etc/my.cnf
 ADD simplevisor.conf /etc/simplevisor.conf
 #ADD sshd_config /etc/ssh/sshd_config
 ADD zabbix.conf.php /etc/zabbix/web/zabbix.conf.php
+RUN chown apache:apache /etc/zabbix/web/zabbix.conf.php
 ADD zabbix.ini /etc/php.d/zabbix.ini
 ADD zabbix_agentd.conf /etc/zabbix/zabbix_agentd.conf
 ADD zabbix_java_gateway.conf /etc/zabbix/zabbix_java_gateway.conf
 ADD zabbix_server.conf /etc/zabbix/zabbix_server.conf
-RUN chown root:zabbix /etc/zabbix/zabbix_server.conf
+RUN chown root:zabbixsrv /etc/zabbix/zabbix_server.conf
+ADD php.ini /etc/php.ini
 #RUN chmod 600 /etc/ssh/sshd_config
 RUN chmod 640 /etc/zabbix/zabbix_server.conf
 
