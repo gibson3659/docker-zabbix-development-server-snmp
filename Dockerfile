@@ -30,9 +30,13 @@ RUN chown root:zabbixsrv /etc/zabbix/zabbix_server.conf
 ADD php.ini /etc/php.ini
 #RUN chmod 600 /etc/ssh/sshd_config
 RUN chmod 640 /etc/zabbix/zabbix_server.conf
+ADD container_init /boot/container_init.sh
+RUN chmod 755 /boot/container_init.sh
+ADD initialize_db /root/initialize_db.sh
+RUN chmod 755 /root/initialize_db.sh
 
 # https://github.com/dotcloud/docker/issues/1240#issuecomment-21807183
-RUN echo "NETWORKING=yes" > /etc/sysconfig/network
+#RUN echo "NETWORKING=yes" > /etc/sysconfig/network
 # http://gaijin-nippon.blogspot.com/2013/07/audit-on-lxc-host.html
 #RUN sed -i -e '/pam_loginuid\.so/ d' /etc/pam.d/sshd
 
@@ -47,6 +51,7 @@ RUN echo "NETWORKING=yes" > /etc/sysconfig/network
 # Initialize zabbix database.
 #RUN service mysqld start; (cd `ls -1d /usr/share/doc/zabbix-server-mysql-*/create | tail -n 1`; cat schema.sql images.sql data.sql) | mysql -uroot zabbix; service mysqld stop
 
-EXPOSE 80 10051 162
+EXPOSE 80 10051 162/udp
 VOLUME ["/var/lib/mysql", "/usr/lib/zabbix/alertscripts", "/usr/lib/zabbix/externalscripts", "/etc/zabbix/zabbix_agentd.d"]
-CMD ["/usr/bin/simplevisor", "--conf", "/etc/simplevisor.conf", "start"]
+#CMD ["/usr/bin/simplevisor", "--conf", "/etc/simplevisor.conf", "start"]
+CMD ["/boot/container_init.sh"]

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+service zabbix_server stop
+mysql <<EOF
+  create database zabbix character set utf8 collate utf8_bin;
+  use zabbix;
+  source /usr/share/zabbix-mysql/schema.sql;
+  source /usr/share/zabbix-mysql/images.sql;
+  source /usr/share/zabbix-mysql/data.sql;
+
+EOF
+zabbix_server -n `grep NodeID= zabbix_server.conf | cut -d\= -f2` -c /etc/zabbix/zabbix_server.conf
+service zabbix_server start
