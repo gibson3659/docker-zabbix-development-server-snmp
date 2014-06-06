@@ -1,0 +1,7 @@
+#! /bin/sh
+
+/usr/bin/simplevisor  --conf /etc/simplevisor.conf --daemon start 
+
+echo This shell is for development and debug purposes only.  If you have no need, type CTL-P CTL-Q.  'exit' will terminate this container.
+/bin/bash
+
