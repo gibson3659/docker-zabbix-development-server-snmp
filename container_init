@@ -1,7 +1,21 @@
 #! /bin/sh
 
-/usr/bin/simplevisor  --conf /etc/simplevisor.conf --daemon start 
+service mysqld start
+sleep 10
 
-echo This shell is for development and debug purposes only.  If you have no need, type CTL-P CTL-Q.  'exit' will terminate this container.
-/bin/bash
+RESULT=`mysql --skip-column-names -e "SHOW DATABASES LIKE 'zabbix'"`
+if [ "$RESULT" == "zabbix" ]; then
+    echo "Database exist"
+else
+    echo "Database does not exist.  Initializing..."
+    sleep 3
+    /root/initialize_zabbix_db.sh
+    service mysqld stop
+fi
+
+/usr/bin/simplevisor  --conf /etc/simplevisor.conf --daemon start
+if [ "$1" == "-d" ]; then
+    echo This shell is for development and debug purposes only.  If you have no need, type CTL-P CTL-Q.  'exit' will terminate this container.
+    /bin/bash
+fi
 

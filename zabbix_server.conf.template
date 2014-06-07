@@ -36,7 +36,7 @@
 # Default:
 # LogFile=
 
-LogFile=/var/log/zabbixsrv/zabbix_server.log
+LogFile=/var/log/zabbix/zabbix_server.log
 
 ### Option: LogFileSize
 #	Maximum size of log file in MB.
@@ -69,7 +69,7 @@ LogFileSize=0
 # Default:
 # PidFile=/tmp/zabbix_server.pid
 
-PidFile=/var/run/zabbixsrv/zabbix_server.pid
+PidFile=/var/run/zabbix/zabbix_server.pid
 
 ### Option: DBHost
 #	Database host name.
@@ -244,8 +244,6 @@ StartJavaPollers=1
 # Range: 0-250
 # Default:
 # StartVMwareCollectors=0
-
-StartVMwareCollectors=1
 
 ### Option: VMwareFrequency
 #	How often Zabbix will connect to VMware service to obtain a new data.
@@ -473,7 +471,7 @@ UnreachableDelay=10
 # Default:
 # AlertScriptsPath=${datadir}/zabbix/alertscripts
 
-AlertScriptsPath=/usr/lib/zabbixsrv/alertscripts
+AlertScriptsPath=/usr/lib/zabbix/alertscripts
 
 ### Option: ExternalScripts
 #	Full path to location of external scripts.
@@ -483,7 +481,7 @@ AlertScriptsPath=/usr/lib/zabbixsrv/alertscripts
 # Default:
 # ExternalScripts=${datadir}/zabbix/externalscripts
 
-ExternalScripts=/usr/lib/zabbixsrv/externalscripts
+ExternalScripts=/usr/lib/zabbix/externalscripts
 
 ### Option: FpingLocation
 #	Location of fping.
