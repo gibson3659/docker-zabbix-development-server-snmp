@@ -13,7 +13,7 @@ else
     service mysqld stop
 fi
 
-/usr/bin/simplevisor  --conf /etc/simplevisor.conf --daemon start
+/usr/bin/simplevisor  --conf /etc/simplevisor.conf single
 if [ "$1" == "-d" ]; then
     echo This shell is for development and debug purposes only.  If you have no need, type CTL-P CTL-Q.  'exit' will terminate this container.
     /bin/bash

@@ -283,6 +283,8 @@ SNMPTrapperFile=/var/log/snmptt/snmptt.log
 # Default:
 # StartSNMPTrapper=0
 
+StartSNMPTrapper=1
+
 ### Option: ListenIP
 #	List of comma delimited IP addresses that the trapper should listen on.
 #	Trapper will listen on all network interfaces if this parameter is missing.

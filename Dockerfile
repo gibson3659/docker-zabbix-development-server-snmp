@@ -10,7 +10,7 @@ RUN yum install -y http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-releas
                    http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm 
 
 # Install packages.
-RUN yum install -y java-1.7.0-openjdk mysql-community-client mysql-community-libs-compat mysql-community-server passwd perl-JSON python-simplevisor
+RUN yum install -y java-1.7.0-openjdk mysql-community-client mysql-community-libs-compat mysql-community-server passwd perl-JSON python-simplevisor net-snmp-perl snmptt
 RUN yum --disablerepo="epel" install -y zabbix zabbix-agent zabbix-server-mysql zabbix-web-mysql zabbix-java-gateway
 
 #necessary since the 2.2.3 package does not include the create scripts.  files extracted from 2.2 rpms
@@ -20,6 +20,7 @@ ADD zabbix_sql.tgz /usr/share/doc/zabbix-server-mysql-2.2.3/
 ADD httpd.conf /etc/httpd/conf/httpd.conf
 ADD my.cnf /etc/my.cnf
 ADD simplevisor.conf /etc/simplevisor.conf
+ADD snmptt.tgz /etc/snmp/
 ADD zabbix.conf.php /etc/zabbix/web/zabbix.conf.php
 RUN chown apache:apache /etc/zabbix/web/zabbix.conf.php
 ADD zabbix.ini /etc/php.d/zabbix.ini
