@@ -374,8 +374,6 @@ HistoryCacheSize=128K
 # Default:
 # TrendCacheSize=4M
 
-TrendCacheSize=128K
-
 ### Option: HistoryTextCacheSize
 #	Size of text history cache, in bytes.
 #	Shared memory size for storing character, text or log history data.
@@ -396,8 +394,6 @@ HistoryTextCacheSize=128K
 # Range: 0,128K-64G
 # Default:
 # ValueCacheSize=8M
-
-ValueCacheSize=128K
 
 ### Option: NodeNoEvents
 #	If set to '1' local events won't be sent to master node.

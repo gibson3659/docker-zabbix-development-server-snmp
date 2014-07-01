@@ -11,7 +11,7 @@ RUN yum install -y http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-releas
 
 # Install packages.
 RUN yum install -y java-1.7.0-openjdk mysql-community-client mysql-community-libs-compat mysql-community-server passwd perl-JSON python-simplevisor net-snmp-perl snmptt
-RUN yum --disablerepo="epel" install -y zabbix zabbix-agent zabbix-server-mysql zabbix-web-mysql zabbix-java-gateway
+RUN yum --disablerepo="epel" install -y zabbix zabbix-agent zabbix-server-mysql zabbix-web-mysql zabbix-java-gateway zabbix-sender
 
 #necessary since the 2.2.3 package does not include the create scripts.  files extracted from 2.2 rpms
 ADD zabbix_sql.tgz /usr/share/doc/zabbix-server-mysql-2.2.3/
@@ -32,7 +32,7 @@ ADD container_init /boot/container_init.sh
 RUN chmod 755 /boot/container_init.sh
 ADD initialize_zabbix_db /root/initialize_zabbix_db.sh
 RUN chmod 755 /root/initialize_zabbix_db.sh
-
+RUN chown root.root -v /usr/bin/fping && chmod a+s -v /usr/bin/fping* && chmod -v 6755 /usr/bin/fping
 EXPOSE 80 10051 162/udp
 VOLUME ["/var/lib/mysql", "/usr/lib/zabbix/alertscripts", "/usr/lib/zabbix/externalscripts", "/etc/zabbix/zabbix_agentd.d"]
 CMD ["/boot/container_init.sh"]
