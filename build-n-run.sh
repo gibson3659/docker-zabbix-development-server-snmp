@@ -33,3 +33,8 @@ docker run -i -t -p 8022:22 -p 8080:80 -p 10051:10051 -p 162:162/udp \
        -v $basedir/zabbix/externalscripts:/usr/lib/zabbix/externalscripts:rw \
        -v $basedir/zabbix/zabbix_agentd.d:/etc/zabbix/zabbix_agentd.d:rw \
        --name zabbix zabbix2.2 $debug
+
+#copy files into external volumes
+cp alertscripts/* $basedir/zabbix/alertscripts/
+cp externalscripts/* $basedir/zabbix/externalscripts/
+cp zabbix_agentd.d/* $basedir/zabbix/zabbix_agentd.d/ 
