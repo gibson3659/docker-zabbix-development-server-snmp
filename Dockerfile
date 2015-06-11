@@ -1,5 +1,5 @@
 FROM centos:centos6
-MAINTAINER  Jason Gibson <jason.gibson@guavus.com>
+MAINTAINER  Jason Gibson <jasondgibson@gmail.com>
 
 # Update base images.
 RUN yum distribution-synchronization -y
